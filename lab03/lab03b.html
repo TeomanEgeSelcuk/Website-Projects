@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Malawi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+        header, footer {
+            background-color: #1abc9c;
+            color: #fff;
+            text-align: center;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .box {
+            background-color: #eafaf1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+        }
+        .quick-facts {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        @media (min-width: 1025px) {
+            .col-lg-3, .col-md-6 {
+                flex: 1 0 23%;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .col-lg-3, .col-md-6 {
+                flex: 1 0 48%;
+            }
+            .image-container img {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .col-lg-3, .col-md-6 {
+                flex: 1 0 100%;
+            }
+            .image-container img {
+                height: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="py-5">
+        <div class="container">
+            <h1 class="display-4">Welcome to Malawi</h1>
+            <p class="lead">Discover the beauty and culture of Malawi</p>
+        </div>
+    </header>
+    
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12 section">
+                <h2>Country Overview: Malawi</h2>
+                <p>Malawi, officially the Republic of Malawi, is a landlocked country in Southeastern Africa. Known as the "Warm Heart of Africa," Malawi is celebrated for its stunning Lake Malawi, diverse wildlife, and vibrant culture. With a population of over 21 million, Malawi is a nation rich in tradition and natural beauty.</p>
+                
+                <div class="row image-container">
+                    <div class="col-md-6 col-12 mb-3">
+                        <img src="media/malawi.avif" alt="Scenic view of Lake Malawi" class="img-fluid">
+                    </div>
+                    <div class="col-md-6 col-12 mb-3">
+                        <img src="media/malawi-2.webp" alt="Wildlife in Malawi" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="quick-facts">
+                    <h2>Quick Facts</h2>
+                    <ul class="list-unstyled">
+                        <li><strong>Capital:</strong> Lilongwe</li>
+                        <li><strong>Official Languages:</strong> English, Chichewa</li>
+                        <li><strong>Population:</strong> ~21.2 million (2024 est.)</li>
+                        <li><strong>Currency:</strong> Malawian Kwacha (MWK)</li>
+                        <li><strong>Motto:</strong> "Unity and Freedom"</li>
+                        <li><strong>Anthem:</strong> "Mlungu dalitsani Malaŵi"</li>
+                        <li><strong>Famous for:</strong> Lake Malawi, Nyika National Park, Traditional Music</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="box">
+                    <h3>Culture</h3>
+                    <p>Malawi's culture is a vibrant tapestry woven from its diverse ethnic groups. Traditional music, dance, and art play a significant role in everyday life. Festivals such as the Lake of Stars showcase Malawi's rich musical heritage, blending local rhythms with international influences.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="box">
+                    <h3>Tourism</h3>
+                    <p>From the pristine beaches of Lake Malawi to the lush landscapes of the Nyika Plateau, Malawi offers a variety of attractions for travelers. Adventure seekers can enjoy hiking, snorkeling, and wildlife safaris, while those seeking relaxation can indulge in serene lake views and cultural experiences.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="box">
+                    <h3>Wildlife</h3>
+                    <p>Malawi is home to an impressive array of wildlife, including elephants, hippos, and various bird species. Nyika National Park and Liwonde National Park are prime destinations for wildlife enthusiasts, offering opportunities to observe animals in their natural habitats.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="box">
+                    <h3>Economy</h3>
+                    <p>Agriculture is the backbone of Malawi's economy, with maize being the staple crop. The country is also a significant producer of tobacco, tea, and sugar. Efforts are ongoing to diversify the economy through tourism, manufacturing, and renewable energy initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 Discover Malawi by Teoman Selcuk | All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

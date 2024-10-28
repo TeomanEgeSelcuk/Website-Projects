@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Lab Solutions</title>
+
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <style>
+
+        /* Styles for Problem 1 */
+
+        #errorMessages {
+            color: red;
+        }
+
+        /* Styles for Problem 3 */
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        #overlay img {
+            position: absolute;
+            object-fit: contain;
+        }
+
+        #closeIconContainer {
+            position: fixed;
+            top: 10px;
+            right: 60px; /* Increased from 40px to 60px to move more to the left */
+            cursor: pointer;
+            z-index: 1001;
+            text-align: center;
+            padding: 5px;
+            display: flex; /* Use flexbox to stack icon and text vertically */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #closeIcon {
+            width: 50px; /* Icon width */
+            height: 50px; /* Icon height */
+            border: 4px solid green; /* Thick green border */
+            border-radius: 8px; /* Rounded corners */
+            background-color: rgba(0, 128, 0, 0.2); /* Semi-transparent green background */
+        }
+
+        #closeIconText {
+            color: green; /* Text color set to green */
+            font-size: 14px;
+            margin-top: 4px;
+            font-weight: bold; /* Changed from normal to bold */
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <h1>Lab Solutions</h1>
+
+
+
+    <!-- Problem 1 -->
+
+    <h2>Problem 1: Form Validation and Display</h2>
+
+    <div id="errorMessages"></div>
+
+    <form id="contactForm">
+
+        <label for="name">Name:</label>
+
+        <input type="text" id="name" name="name">
+
+        <br><br>
+
+        <label for="address">Address:</label>
+
+        <input type="text" id="address" name="address">
+
+        <br><br>
+
+        <label for="phone">Phone Number (format: (xxx) xxx-xxxx):</label>
+
+        <input type="text" id="phone" name="phone" placeholder="(416) 555-5555">
+
+        <br><br>
+
+        <button type="button" id="submitBtn">Submit</button>
+
+    </form>
+
+    <div id="displayArea"></div>
+
+
+
+    <hr>
+
+
+
+    <!-- Problem 2 -->
+
+    <h2>Problem 2: Character Counter</h2>
+
+    <textarea id="textInput" rows="4" cols="50"></textarea>
+
+    <div id="counterArea" style="font-size: 24px; margin-top: 10px;">
+
+        Total characters: <span id="totalChars">0</span><br>
+
+        Letters only (A-Z, a-z): <span id="letterChars">0</span>
+
+    </div>
+
+
+
+    <hr>
+
+
+
+    <!-- Problem 3 -->
+
+    <h2>Problem 3: Image Full Screen with Animation</h2>
+
+    <!-- Thumbnail Image -->
+
+    <img id="thumbnail" src="images/learnJQuery.webp" alt="Thumbnail Image" style="width: 200px; cursor: pointer;">
+
+
+
+    <script>
+
+        // Problem 1 JavaScript
+
+        $(document).ready(function() {
+
+            $('#submitBtn').on('click', function() {
+
+                $('#errorMessages').empty();
+
+                $('#displayArea').empty();
+
+
+
+                const name = $('#name').val();
+
+                const address = $('#address').val();
+
+                const phone = $('#phone').val();
+
+
+
+                let valid = true;
+
+                let errorMessages = [];
+
+
+
+                if (!validateName(name)) {
+
+                    valid = false;
+
+                    errorMessages.push('Please enter a valid name (letters and spaces only).');
+
+                }
+
+
+
+                if (!validatePhone(phone)) {
+
+                    valid = false;
+
+                    errorMessages.push('Please enter a valid phone number in the format (xxx) xxx-xxxx.');
+
+                }
+
+
+
+                if (valid) {
+
+                    const transformedPhone = transformPhoneNumber(phone);
+
+                    displayInfo(name, address, transformedPhone);
+
+                } else {
+
+                    // Display errors
+
+                    errorMessages.forEach(function(msg) {
+
+                        const errorP = $('<p></p>').text(msg);
+
+                        $('#errorMessages').append(errorP);
+
+                    });
+
+                }
+
+            });
+
+
+
+            function validateName(name) {
+
+                const namePattern = /^[A-Za-z\s]+$/;
+
+                return namePattern.test(name.trim());
+
+            }
+
+
+
+            function validatePhone(phone) {
+
+                const phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+                return phonePattern.test(phone.trim());
+
+            }
+
+
+
+            function transformPhoneNumber(phone) {
+
+                const phonePattern = /^\((\d{3})\) (\d{3}-\d{4})$/;
+
+                const match = phonePattern.exec(phone.trim());
+
+                if (match) {
+
+                    return `${match[1]}-${match[2]}`;
+
+                } else {
+
+                    return phone;
+
+                }
+
+            }
+
+
+
+            function displayInfo(name, address, phone) {
+
+                const infoDiv = $('<div></div>').css({
+
+                    'font-size': '24px',
+
+                    'color': '#333',
+
+                    'font-family': 'Arial, sans-serif',
+
+                    'border': '2px solid #4CAF50',
+
+                    'padding': '20px',
+
+                    'margin-top': '20px',
+
+                    'background-color': '#f9f9f9',
+
+                    'border-radius': '10px'
+
+                });
+
+
+
+                const nameElement = $('<p></p>').html(`<strong>Name:</strong> ${name}`);
+
+                const addressElement = $('<p></p>').html(`<strong>Address:</strong> ${address}`);
+
+                const phoneElement = $('<p></p>').html(`<strong>Phone:</strong> ${phone}`);
+
+
+
+                infoDiv.append(nameElement, addressElement, phoneElement);
+
+                $('#displayArea').append(infoDiv);
+
+            }
+
+        });
+
+
+
+        // Problem 2 JavaScript
+
+        $(document).ready(function() {
+
+            $('#textInput').on('input', function() {
+
+                const text = $(this).val();
+
+                const totalChars = text.length;
+
+                const lettersOnly = text.replace(/[^A-Za-z]/g, '').length;
+
+
+
+                $('#totalChars').text(totalChars);
+
+                $('#letterChars').text(lettersOnly);
+
+            });
+
+        });
+
+
+
+        // Problem 3 JavaScript
+
+        $(document).ready(function() {
+
+            $('#thumbnail').on('click', function() {
+
+                var $img = $(this);
+
+                var imgSrc = $img.attr('src');
+
+                var $overlay = $('<div id="overlay"></div>');
+
+                var $overlayImg = $('<img src="' + imgSrc + '">');
+
+                var $closeIconContainer = $('<div id="closeIconContainer"></div>');
+
+                var $icon = $('<img src="images/reset_image.png" id="closeIcon" alt="Reset Image">');
+
+                var $iconText = $('<div id="closeIconText">Reset Image</div>');
+
+
+
+                // Append overlay and icons to the DOM
+
+                $('body').append($overlay);
+
+                $overlay.append($overlayImg);
+
+                $closeIconContainer.append($icon, $iconText);
+
+                $overlay.append($closeIconContainer);
+
+
+
+                $overlay.show();
+
+
+
+                // Get position and size of the thumbnail image
+
+                var imgOffset = $img.offset();
+
+                var imgWidth = $img.width();
+
+                var imgHeight = $img.height();
+
+
+
+                // Set initial position and size of overlay image to match the thumbnail
+
+                $overlayImg.css({
+
+                    top: imgOffset.top - $(window).scrollTop(),
+
+                    left: imgOffset.left - $(window).scrollLeft(),
+
+                    width: imgWidth,
+
+                    height: imgHeight,
+
+                    position: 'absolute'
+
+                });
+
+
+
+                // Animate to full screen
+
+                $overlayImg.animate({
+
+                    top: 0,
+
+                    left: 0,
+
+                    width: '100%',
+
+                    height: '100%'
+
+                }, 1000);
+
+
+
+                // Click event for the close icon
+
+                $icon.on('click', function() {
+
+                    // Animate back to thumbnail position and size
+
+                    $overlayImg.animate({
+
+                        top: imgOffset.top - $(window).scrollTop(),
+
+                        left: imgOffset.left - $(window).scrollLeft(),
+
+                        width: imgWidth,
+
+                        height: imgHeight
+
+                    }, 1000, function() {
+
+                        // Remove overlay
+
+                        $overlay.remove();
+
+                    });
+
+                });
+
+            });
+
+        });
+
+    </script>
+
+
+
+</body>
+
+</html>

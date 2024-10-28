@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 04</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9; /* Light background color for better readability */
+            color: #333; /* Main text color */
+            line-height: 1.6; /* Improves readability */
+        }
+
+        /* Styling for the main heading */
+        h1 {
+            color: #2c3e50; /* Darker heading color */
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the sub-headings */
+        h2 {
+            color: #34495e; /* Slightly lighter than the main heading */
+            font-size: 28px;
+            margin-top: 40px;
+            border-bottom: 2px solid #ddd; /* Bottom border for distinction */
+            padding-bottom: 10px;
+        }
+
+        /* Container styling for bookmark and palindrome sections */
+        div {
+            margin-bottom: 20px;
+        }
+
+        /* Icon styling: Images are larger (150%) and aligned with the text */
+        .icon {
+            width: 30px;  /* Size increased by 150% */
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        /* Link styling: Make URLs blue and underline when hovered */
+        a {
+            text-decoration: none;
+            color: #2980b9; /* Blue color for links */
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* Additional styling for palindrome result text */
+        #palindromes div {
+            padding: 5px 0;
+        }
+
+        /* Styling for the palindrome results */
+        .palindrome-result {
+            font-size: 18px; /* Slightly larger font for the results */
+            padding: 5px;
+        }
+
+        /* Make sure red and green colors are distinguishable */
+        .palindrome-result.green {
+            color: green; /* Palindromes will be displayed in green */
+        }
+        .palindrome-result.red {
+            color: red; /* Non-palindromes will be displayed in red */
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Lab 04</h1> <!-- Main heading -->
+
+    <!-- Problem 1: Bookmarks -->
+    <h2>Problem 1: Bookmarks</h2>
+    <div id="bookmarks"></div> <!-- Empty container for bookmarks -->
+
+    <!-- Problem 2: Palindrome Checker -->
+    <h2>Problem 2: Palindrome Checker</h2>
+    <div id="palindromes"></div> <!-- Empty container for palindrome results -->
+
+    <script>
+        // Problem 1: Bookmarks
+        // Function to create and display bookmarks
+        function createBookmarks() {
+            const bookmarks = [
+                'http://www.piutetrailrvpark.com/',         // Unsecure
+                'https://chat.groq.com/',                   // Secure
+                'http://www.faqs.org/faqs/',                // Unsecure
+                'https://www.github.com'                    // Secure
+            ];
+
+            // Find the 'bookmarks' div where we will add the URLs
+            const bookmarksDiv = document.getElementById('bookmarks');
+
+            // Loop through each bookmark URL and create a display with an icon and link
+            bookmarks.forEach(url => {
+                // Check if the URL is secure (starts with https)
+                const isSecure = url.startsWith('https://');
+
+                // Choose the icon based on whether the link is secure or not
+                const iconPath = isSecure ? 'images/greenlock.png' : 'images/redlock.png';
+
+                // Create an image element for the icon (either green or red lock)
+                const iconImg = document.createElement('img');
+                iconImg.src = iconPath;  // Set the image source
+                iconImg.alt = isSecure ? 'Secure' : 'Unsecure';  // Set alternative text
+                iconImg.className = 'icon';  // Apply the 'icon' styling class
+
+                // Create an anchor (link) element for the bookmark URL
+                const link = document.createElement('a');
+                link.href = url;  // Set the href attribute to the bookmark URL
+                link.textContent = url;  // Display the URL text
+                link.target = '_blank';  // Open the link in a new tab
+
+                // Create a div element to hold the icon and link
+                const div = document.createElement('div');
+                div.appendChild(iconImg);  // Add the icon to the div
+                div.appendChild(link);  // Add the link to the div
+
+                // Finally, add the div to the 'bookmarks' container
+                bookmarksDiv.appendChild(div);
+            });
+        }
+
+        // Problem 2: Palindrome Checker
+        // Function to clean up the string (remove spaces, punctuation, and make lowercase)
+        function cleanString(str) {
+            // Remove spaces, punctuation, and convert to lowercase
+            return str.toLowerCase().replace(/[^a-z0-9]/g, '');  // Keeps only alphanumeric characters
+        }
+
+        // Function to check if a string is a palindrome
+        function isPalindrome(str) {
+            const cleaned = cleanString(str);  // Clean the input string
+            const len = cleaned.length;  // Get the length of the cleaned string
+
+            // Loop through half the string and compare characters from both ends
+            for (let i = 0; i < len / 2; i++) {
+                // If any characters don't match, it's not a palindrome
+                if (cleaned[i] !== cleaned[len - 1 - i]) {
+                    return false;  // Return false if mismatch
+                }
+            }
+            return true;  // If all characters match, it's a palindrome
+        }
+
+        // Function to display palindrome results
+        function checkPalindromes() {
+            const testStrings = [
+                { text: "Drab as a fool, aloof as a bard.", isPalindrome: true },
+                { text: "It ain't over till it's over", isPalindrome: false },
+                { text: "radar", isPalindrome: true },
+                { text: "When you come to a fork in the road, take it", isPalindrome: false },
+                { text: "Marge lets Norah see Sharon’s telegram.", isPalindrome: true }
+            ];
+
+            // Find the 'palindromes' div where we will display the results
+            const palindromesDiv = document.getElementById('palindromes');
+
+            // Loop through the test strings and check if each one is a palindrome
+            testStrings.forEach(item => {
+                const { text } = item;  // Get the string to check
+                const result = isPalindrome(text);  // Check if it's a palindrome
+                const colorClass = result ? 'green' : 'red';  // Set color class based on result
+
+                // Create a div for the result and set the color and text
+                const div = document.createElement('div');
+                div.className = `palindrome-result ${colorClass}`;  // Apply the color class
+                div.textContent = text;  // Set the text content to the string
+
+                // Add the result div to the 'palindromes' container
+                palindromesDiv.appendChild(div);
+            });
+        }
+
+        // Execute the functions to display bookmarks and check palindromes
+        createBookmarks();  // Display the bookmarks
+        checkPalindromes();  // Check the palindrome strings
+    </script>
+</body>
+</html>

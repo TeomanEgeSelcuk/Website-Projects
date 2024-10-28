@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Malawi</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        
+        header, .section, footer {
+            padding: 20px;
+            background: #fff;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            flex: 100%;
+            background-color: #1abc9c;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .main-content {
+            flex: 70%;
+            background-color: #fff;
+        }
+        
+        .side-content {
+            flex: 30%;
+            background-color: #fff;
+        }
+        
+        footer {
+            flex: 100%;
+            background-color: #1abc9c;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .flex-box {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .box {
+            flex: 1;
+            background-color: #eafaf1;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-width: 250px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        @media (min-width: 1025px) {
+            .main-content {
+                flex: 70%;
+            }
+            .side-content {
+                flex: 30%;
+            }
+            .flex-box {
+                flex-direction: row;
+            }
+            .image-container img {
+                width: 48%;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .main-content {
+                flex: 60%;
+            }
+            .side-content {
+                flex: 40%;
+            }
+            .flex-box {
+                flex-direction: row;
+            }
+            .image-container img {
+                width: 48%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content, .side-content {
+                flex: 100%;
+            }
+            header, .section, footer {
+                margin: 5px;
+                padding: 15px;
+            }
+            .flex-box {
+                flex-direction: column;
+            }
+            .image-container img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Malawi</h1>
+        <p>Discover the beauty and culture of Malawi</p>
+    </header>
+    
+    <div class="container">
+        <div class="main-content section">
+            <h2>Country Overview: Malawi</h2>
+            <p>Malawi, officially the Republic of Malawi, is a landlocked country in Southeastern Africa. Known as the "Warm Heart of Africa," Malawi is celebrated for its stunning Lake Malawi, diverse wildlife, and vibrant culture. With a population of over 21 million, Malawi is a nation rich in tradition and natural beauty.</p>
+            
+            <div class="image-container">
+                <img src="media/malawi.avif" alt="Scenic view of Lake Malawi">
+                <img src="media/malawi-2.webp" alt="Wildlife in Malawi">
+            </div>
+        </div>
+        
+        <div class="side-content section">
+            <h2>Quick Facts</h2>
+            <ul>
+                <li><strong>Capital:</strong> Lilongwe</li>
+                <li><strong>Official Languages:</strong> English, Chichewa</li>
+                <li><strong>Population:</strong> ~21.2 million (2024 est.)</li>
+                <li><strong>Currency:</strong> Malawian Kwacha (MWK)</li>
+                <li><strong>Motto:</strong> "Unity and Freedom"</li>
+                <li><strong>Anthem:</strong> "Mlungu dalitsani Malaŵi"</li>
+                <li><strong>Famous for:</strong> Lake Malawi, Nyika National Park, Traditional Music</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="container flex-box">
+        <div class="box">
+            <h3>Culture</h3>
+            <p>Malawi's culture is a vibrant tapestry woven from its diverse ethnic groups. Traditional music, dance, and art play a significant role in everyday life. Festivals such as the Lake of Stars showcase Malawi's rich musical heritage, blending local rhythms with international influences.</p>
+        </div>
+        
+        <div class="box">
+            <h3>Tourism</h3>
+            <p>From the pristine beaches of Lake Malawi to the lush landscapes of the Nyika Plateau, Malawi offers a variety of attractions for travelers. Adventure seekers can enjoy hiking, snorkeling, and wildlife safaris, while those seeking relaxation can indulge in serene lake views and cultural experiences.</p>
+        </div>
+        
+        <div class="box">
+            <h3>Wildlife</h3>
+            <p>Malawi is home to an impressive array of wildlife, including elephants, hippos, and various bird species. Nyika National Park and Liwonde National Park are prime destinations for wildlife enthusiasts, offering opportunities to observe animals in their natural habitats.</p>
+        </div>
+        
+        <div class="box">
+            <h3>Economy</h3>
+            <p>Agriculture is the backbone of Malawi's economy, with maize being the staple crop. The country is also a significant producer of tobacco, tea, and sugar. Efforts are ongoing to diversify the economy through tourism, manufacturing, and renewable energy initiatives.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Discover Malawi by Teoman Selcuk | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
