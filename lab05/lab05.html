@@ -1,445 +1,350 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Lab Solutions</title>
-
+    <title>Lab 5 Solutions</title>
     <!-- Include jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
     <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+            margin: 20px;
+            background-color: #f0f2f5; /* Light background color */
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50; /* Green color for the main heading */
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50; /* Underline for subheadings */
+            padding-bottom: 5px;
+        }
 
         /* Styles for Problem 1 */
-
         #errorMessages {
             color: red;
+            margin-bottom: 10px;
         }
 
         /* Styles for Problem 3 */
-
         #overlay {
-            display: none;
-            position: fixed;
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 1000;
+            background-color: rgba(0,0,0,0.8); /* Semi-transparent background */
+            z-index: 1000; /* On top of other elements */
             overflow: hidden;
+            transition: background-color 0.3s ease; /* Smooth background transition */
         }
 
         #overlay img {
-            position: absolute;
-            object-fit: contain;
+            position: absolute; /* Positioned absolutely within overlay */
+            object-fit: contain; /* Maintain aspect ratio */
+            border-radius: 8px; /* Rounded corners for images */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow */
         }
 
         #closeIconContainer {
-            position: fixed;
-            top: 10px;
-            right: 60px; /* Increased from 40px to 60px to move more to the left */
-            cursor: pointer;
-            z-index: 1001;
-            text-align: center;
-            padding: 5px;
-            display: flex; /* Use flexbox to stack icon and text vertically */
-            flex-direction: column;
-            align-items: center;
+            position: fixed; /* Fixed position for close icon */
+            top: 20px;
+            left: 20px; /* Moved to the left */
+            cursor: pointer; /* Pointer cursor on hover */
+            z-index: 1001; /* Above the overlay */
+            display: flex; /* Flexbox for alignment */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            width: 75px; /* Increased from 50px to 75px (50% larger) */
+            height: 75px; /* Increased from 50px to 75px (50% larger) */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            border-radius: 50%; /* Circular container */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Subtle shadow */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+        }
+
+        #closeIconContainer:hover {
+            background-color: rgba(255, 255, 255, 1); /* Opaque on hover */
+            transform: scale(1.1); /* Slightly enlarge on hover */
         }
 
         #closeIcon {
-            width: 50px; /* Icon width */
-            height: 50px; /* Icon height */
-            border: 4px solid green; /* Thick green border */
+            width: 36px; /* Increased from 24px to 36px (50% larger) */
+            height: 36px; /* Increased from 24px to 36px (50% larger) */
+        }
+
+        /* Styles for Form Elements */
+        form label {
+            display: inline-block;
+            width: 200px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        form input {
+            padding: 8px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        /* Styles for Display Area */
+        #displayArea {
+            margin-top: 20px;
+        }
+
+        /* Styles for Problem 2 */
+        #counterArea {
+            font-size: 18px;
+            margin-top: 10px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+        }
+
+        /* Styles for Problem 3 Thumbnail */
+        #thumbnail {
+            width: 200px; /* Thumbnail width */
+            cursor: pointer;
+            border: 2px solid #4CAF50; /* Green border */
             border-radius: 8px; /* Rounded corners */
-            background-color: rgba(0, 128, 0, 0.2); /* Semi-transparent green background */
+            transition: transform 0.3s ease; /* Smooth scaling */
         }
 
-        #closeIconText {
-            color: green; /* Text color set to green */
-            font-size: 14px;
-            margin-top: 4px;
-            font-weight: bold; /* Changed from normal to bold */
+        #thumbnail:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
-
     </style>
-
 </head>
-
 <body>
-
-
-
-    <h1>Lab Solutions</h1>
-
-
+    <h1>Lab 5 Solutions</h1>
 
     <!-- Problem 1 -->
-
     <h2>Problem 1: Form Validation and Display</h2>
-
     <div id="errorMessages"></div>
-
     <form id="contactForm">
-
         <label for="name">Name:</label>
-
-        <input type="text" id="name" name="name">
-
+        <input type="text" id="name" name="name" placeholder="John Doe">
         <br><br>
-
         <label for="address">Address:</label>
-
-        <input type="text" id="address" name="address">
-
+        <input type="text" id="address" name="address" placeholder="123 Main St">
         <br><br>
-
         <label for="phone">Phone Number (format: (xxx) xxx-xxxx):</label>
-
         <input type="text" id="phone" name="phone" placeholder="(416) 555-5555">
-
         <br><br>
-
         <button type="button" id="submitBtn">Submit</button>
-
     </form>
-
     <div id="displayArea"></div>
 
-
-
     <hr>
-
-
 
     <!-- Problem 2 -->
-
     <h2>Problem 2: Character Counter</h2>
-
-    <textarea id="textInput" rows="4" cols="50"></textarea>
-
-    <div id="counterArea" style="font-size: 24px; margin-top: 10px;">
-
+    <textarea id="textInput" rows="4" cols="50" placeholder="Type your text here..."></textarea>
+    <div id="counterArea">
         Total characters: <span id="totalChars">0</span><br>
-
         Letters only (A-Z, a-z): <span id="letterChars">0</span>
-
     </div>
-
-
 
     <hr>
 
-
-
     <!-- Problem 3 -->
-
     <h2>Problem 3: Image Full Screen with Animation</h2>
-
     <!-- Thumbnail Image -->
-
-    <img id="thumbnail" src="images/learnJQuery.webp" alt="Thumbnail Image" style="width: 200px; cursor: pointer;">
-
-
+    <img id="thumbnail" src="images/learnJQuery.webp" alt="Thumbnail Image">
 
     <script>
-
-        // Problem 1 JavaScript
-
+        // Wait for the document to be fully loaded
         $(document).ready(function() {
+            /* ==================== Problem 1: Form Validation and Display ==================== */
+            
+            // Cache jQuery selectors for efficiency
+            const $submitBtn = $('#submitBtn');
+            const $errorMessages = $('#errorMessages');
+            const $displayArea = $('#displayArea');
+            const $name = $('#name');
+            const $address = $('#address');
+            const $phone = $('#phone');
 
-            $('#submitBtn').on('click', function() {
+            // Precompile regular expressions for validation
+            const namePattern = /^[A-Za-z\s]+$/; // Allows only letters and spaces
+            const phonePattern = /^\((\d{3})\) (\d{3}-\d{4})$/; // Matches (xxx) xxx-xxxx with capture groups
 
-                $('#errorMessages').empty();
+            // Click event handler for the submit button
+            $submitBtn.on('click', function() {
+                // Clear previous error messages and display area
+                $errorMessages.empty();
+                $displayArea.empty();
 
-                $('#displayArea').empty();
+                // Get trimmed values from input fields
+                const nameVal = $name.val().trim();
+                const addressVal = $address.val().trim();
+                const phoneVal = $phone.val().trim();
 
+                let isValid = true; // Flag to track form validity
+                const errors = []; // Array to store error messages
 
-
-                const name = $('#name').val();
-
-                const address = $('#address').val();
-
-                const phone = $('#phone').val();
-
-
-
-                let valid = true;
-
-                let errorMessages = [];
-
-
-
-                if (!validateName(name)) {
-
-                    valid = false;
-
-                    errorMessages.push('Please enter a valid name (letters and spaces only).');
-
+                // Validate name using the precompiled regex
+                if (!namePattern.test(nameVal)) {
+                    isValid = false;
+                    errors.push('Please enter a valid name (letters and spaces only).');
                 }
 
-
-
-                if (!validatePhone(phone)) {
-
-                    valid = false;
-
-                    errorMessages.push('Please enter a valid phone number in the format (xxx) xxx-xxxx.');
-
+                // Validate phone number using the precompiled regex
+                if (!phonePattern.test(phoneVal)) {
+                    isValid = false;
+                    errors.push('Please enter a valid phone number in the format (xxx) xxx-xxxx.');
                 }
 
-
-
-                if (valid) {
-
-                    const transformedPhone = transformPhoneNumber(phone);
-
-                    displayInfo(name, address, transformedPhone);
-
+                if (isValid) {
+                    // If valid, transform phone number and display info
+                    const transformedPhone = phoneVal.replace(phonePattern, '$1-$2'); // Convert (xxx) xxx-xxxx to xxx-xxxx
+                    displayInfo(nameVal, addressVal, transformedPhone);
                 } else {
-
-                    // Display errors
-
-                    errorMessages.forEach(function(msg) {
-
-                        const errorP = $('<p></p>').text(msg);
-
-                        $('#errorMessages').append(errorP);
-
+                    // If invalid, display all error messages
+                    errors.forEach(function(msg) {
+                        $('<p></p>').text(msg).appendTo($errorMessages); // Create and append error paragraph
                     });
-
                 }
-
             });
 
-
-
-            function validateName(name) {
-
-                const namePattern = /^[A-Za-z\s]+$/;
-
-                return namePattern.test(name.trim());
-
-            }
-
-
-
-            function validatePhone(phone) {
-
-                const phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
-
-                return phonePattern.test(phone.trim());
-
-            }
-
-
-
-            function transformPhoneNumber(phone) {
-
-                const phonePattern = /^\((\d{3})\) (\d{3}-\d{4})$/;
-
-                const match = phonePattern.exec(phone.trim());
-
-                if (match) {
-
-                    return `${match[1]}-${match[2]}`;
-
-                } else {
-
-                    return phone;
-
-                }
-
-            }
-
-
-
+            // Function to display user information in the display area
             function displayInfo(name, address, phone) {
-
+                // Create a styled div to hold the information
                 const infoDiv = $('<div></div>').css({
-
-                    'font-size': '24px',
-
+                    'font-size': '18px',
                     'color': '#333',
-
                     'font-family': 'Arial, sans-serif',
-
                     'border': '2px solid #4CAF50',
-
                     'padding': '20px',
-
                     'margin-top': '20px',
-
-                    'background-color': '#f9f9f9',
-
-                    'border-radius': '10px'
-
+                    'background-color': '#fff',
+                    'border-radius': '10px',
+                    'box-shadow': '0 2px 4px rgba(0,0,0,0.1)' /* Subtle shadow */
                 });
 
+                // Create and append name, address, and phone elements
+                $('<p></p>').html(`<strong>Name:</strong> ${name}`).appendTo(infoDiv);
+                $('<p></p>').html(`<strong>Address:</strong> ${address}`).appendTo(infoDiv);
+                $('<p></p>').html(`<strong>Phone:</strong> ${phone}`).appendTo(infoDiv);
 
-
-                const nameElement = $('<p></p>').html(`<strong>Name:</strong> ${name}`);
-
-                const addressElement = $('<p></p>').html(`<strong>Address:</strong> ${address}`);
-
-                const phoneElement = $('<p></p>').html(`<strong>Phone:</strong> ${phone}`);
-
-
-
-                infoDiv.append(nameElement, addressElement, phoneElement);
-
-                $('#displayArea').append(infoDiv);
-
+                // Append the infoDiv to the display area
+                $displayArea.append(infoDiv);
             }
 
-        });
+            /* ==================== Problem 2: Character Counter ==================== */
 
+            // Cache jQuery selectors for efficiency
+            const $textInput = $('#textInput');
+            const $totalChars = $('#totalChars');
+            const $letterChars = $('#letterChars');
 
+            // Event handler for input in the textarea
+            $textInput.on('input', function() {
+                const text = $(this).val(); // Get current text
+                const totalLength = text.length; // Total number of characters
+                const lettersOnlyCount = (text.match(/[A-Za-z]/g) || []).length; // Count letters only
 
-        // Problem 2 JavaScript
-
-        $(document).ready(function() {
-
-            $('#textInput').on('input', function() {
-
-                const text = $(this).val();
-
-                const totalChars = text.length;
-
-                const lettersOnly = text.replace(/[^A-Za-z]/g, '').length;
-
-
-
-                $('#totalChars').text(totalChars);
-
-                $('#letterChars').text(lettersOnly);
-
+                // Update the character counters
+                $totalChars.text(totalLength);
+                $letterChars.text(lettersOnlyCount);
             });
 
-        });
+            /* ==================== Problem 3: Image Full Screen with Animation ==================== */
 
-
-
-        // Problem 3 JavaScript
-
-        $(document).ready(function() {
-
+            // Click event handler for the thumbnail image
             $('#thumbnail').on('click', function() {
+                const $img = $(this); // Reference to the clicked image
+                const imgSrc = $img.attr('src'); // Get the source of the image
 
-                var $img = $(this);
+                // Create overlay elements
+                const $overlay = $('<div id="overlay"></div>'); // Overlay background
+                const $overlayImg = $('<img src="' + imgSrc + '">'); // Enlarged image
+                const $closeIconContainer = $('<div id="closeIconContainer"></div>'); // Container for close icon
+                const $icon = $('<img src="images/reset_image.png" id="closeIcon" alt="Reset Image">'); // Close icon
 
-                var imgSrc = $img.attr('src');
-
-                var $overlay = $('<div id="overlay"></div>');
-
-                var $overlayImg = $('<img src="' + imgSrc + '">');
-
-                var $closeIconContainer = $('<div id="closeIconContainer"></div>');
-
-                var $icon = $('<img src="images/reset_image.png" id="closeIcon" alt="Reset Image">');
-
-                var $iconText = $('<div id="closeIconText">Reset Image</div>');
-
-
-
-                // Append overlay and icons to the DOM
-
-                $('body').append($overlay);
-
+                // Append elements to the overlay
                 $overlay.append($overlayImg);
-
-                $closeIconContainer.append($icon, $iconText);
-
+                $closeIconContainer.append($icon); // Removed the icon text
                 $overlay.append($closeIconContainer);
+                $('body').append($overlay); // Add overlay to the body
 
+                $overlay.fadeIn(300); // Fade in the overlay
 
+                // Get the current position and size of the thumbnail
+                const imgOffset = $img.offset();
+                const imgWidth = $img.width();
+                const imgHeight = $img.height();
 
-                $overlay.show();
-
-
-
-                // Get position and size of the thumbnail image
-
-                var imgOffset = $img.offset();
-
-                var imgWidth = $img.width();
-
-                var imgHeight = $img.height();
-
-
-
-                // Set initial position and size of overlay image to match the thumbnail
-
+                // Set the initial position and size of the overlay image to match the thumbnail
                 $overlayImg.css({
-
                     top: imgOffset.top - $(window).scrollTop(),
-
                     left: imgOffset.left - $(window).scrollLeft(),
-
                     width: imgWidth,
-
                     height: imgHeight,
-
                     position: 'absolute'
-
                 });
 
-
-
-                // Animate to full screen
-
+                // Animate the overlay image to full screen
                 $overlayImg.animate({
-
                     top: 0,
-
                     left: 0,
-
                     width: '100%',
-
                     height: '100%'
-
-                }, 1000);
-
-
-
-                // Click event for the close icon
-
-                $icon.on('click', function() {
-
-                    // Animate back to thumbnail position and size
-
-                    $overlayImg.animate({
-
-                        top: imgOffset.top - $(window).scrollTop(),
-
-                        left: imgOffset.left - $(window).scrollLeft(),
-
-                        width: imgWidth,
-
-                        height: imgHeight
-
-                    }, 1000, function() {
-
-                        // Remove overlay
-
-                        $overlay.remove();
-
+                }, 800, function() { // Animation duration: 0.8 seconds
+                    // Ensure the close icon is correctly positioned after animation
+                    $closeIconContainer.css({
+                        top: '20px',
+                        left: '20px'
                     });
-
                 });
 
+                // Click event handler for the close icon
+                $icon.on('click', function() {
+                    // Animate the overlay image back to thumbnail size and position
+                    $overlayImg.animate({
+                        top: imgOffset.top - $(window).scrollTop(),
+                        left: imgOffset.left - $(window).scrollLeft(),
+                        width: imgWidth,
+                        height: imgHeight
+                    }, 800, function() { // Animation duration: 0.8 seconds
+                        $overlay.fadeOut(300, function() { // Fade out the overlay
+                            $overlay.remove(); // Remove the overlay from the DOM after fade out
+                        });
+                    });
+                });
+
+                // Optional: Close the overlay when clicking outside the image
+                $overlay.on('click', function(e) {
+                    if ($(e.target).is('#overlay')) { // Check if the click is on the overlay background
+                        $icon.click(); // Trigger the close icon click event
+                    }
+                });
             });
-
         });
-
     </script>
-
-
-
 </body>
-
 </html>
