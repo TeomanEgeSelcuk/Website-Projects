@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <!-- Defines character encoding and basic metadata for the HTML document -->
+    <meta charset="UTF-8"> <!-- Specifies the character encoding as UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures the page is responsive to different screen sizes -->
+    <title>Lab 06 - SVG Solutions</title> <!-- Sets the title of the web page -->
+
+    <style>
+        /* Basic styling for body */
+        body {
+            font-family: Arial, sans-serif; /* Sets the font for the page */
+            text-align: center; /* Centers the text in the body */
+            background-color: #f1f1f1; /* Slightly adjusted background color */
+            margin: 0; /* Removes default margin */
+            padding: 0; /* Removes default padding */
+        }
+
+        /* Styling for the header */
+        h1 {
+            background-color: #333; /* Dark background color */
+            color: #fff; /* White text color */
+            padding: 18px 0; /* Slightly adjusted vertical padding */
+            margin: 0; /* Removes default margin */
+        }
+
+        /* Styling for the SVG container */
+        .svg-container {
+            margin: 35px auto; /* Slightly adjusted vertical margin */
+            max-width: 800px; /* Sets a maximum width */
+            background-color: #fff; /* White background for the container */
+            padding: 22px; /* Slightly adjusted padding inside the container */
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1); /* Slightly adjusted shadow */
+            border-radius: 8px; /* Slightly rounded corners */
+        }
+
+        /* Styling for subheadings */
+        h2 {
+            color: #333; /* Dark color for subheadings */
+        }
+
+        /* Styling for SVG elements */
+        svg {
+            border: 1px solid #ccc; /* Adds a light border around SVG */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lab 06 - SVG Solutions</h1> <!-- Main heading for the page -->
+
+    <!-- Problem 1: Polygons -->
+    <div class="svg-container"> <!-- Container for the SVG elements related to Problem 1 -->
+        <h2>Problem 1: Polygons</h2> <!-- Subheading for Problem 1 -->
+
+        <svg width="800" height="300"> <!-- SVG canvas with specific width and height -->
+            <!-- Triangle -->
+            <!-- Creates a triangle with specific points and styling -->
+            <polygon points="125,145 185,245 75,245" fill="lightyellow" stroke="black" stroke-width="2" />
+            <text x="130" y="265" font-size="20" fill="black" text-anchor="middle">Triangle</text> <!-- Label for the triangle -->
+
+            <!-- Quadrilateral (Square) -->
+            <!-- Creates a square centered at (305,195) -->
+            <rect x="260" y="150" width="90" height="90" fill="#7EC0EE" stroke="black" stroke-width="2" />
+            <text x="305" y="265" font-size="20" fill="black" text-anchor="middle">Quadrilateral</text> <!-- Label for the square -->
+
+            <!-- Pentagon -->
+            <!-- Creates a regular pentagon centered at (485,195) -->
+            <polygon points="
+                485,145 
+                535,180 
+                520,235 
+                455,235 
+                440,180
+            " fill="#FFD1DC" stroke="black" stroke-width="2" />
+            <text x="485" y="265" font-size="20" fill="black" text-anchor="middle">Pentagon</text> <!-- Label for the pentagon -->
+
+            <!-- Hexagon -->
+            <!-- Creates a regular hexagon centered at (665,195) -->
+            <polygon points="
+                715,195 
+                690,238 
+                640,238 
+                615,195 
+                640,152 
+                690,152
+            " fill="#90EE90" stroke="black" stroke-width="2" />
+            <text x="665" y="265" font-size="20" fill="black" text-anchor="middle">Hexagon</text> <!-- Label for the hexagon -->
+        </svg>
+    </div>
+
+    <!-- Problem 2: Overlapping Circles -->
+    <div class="svg-container"> <!-- Container for the SVG elements related to Problem 2 -->
+        <h2>Problem 2: Overlapping Circles</h2> <!-- Subheading for Problem 2 -->
+
+        <svg width="400" height="400"> <!-- SVG canvas with specific width and height -->
+            <!-- Magenta Circle -->
+            <!-- Circle with center (135,195), radius 95, and semi-transparent fill -->
+            <circle cx="135" cy="195" r="95" fill="magenta" opacity="0.75" />
+            <text x="135" y="200" font-size="28" fill="black" text-anchor="middle">M</text> <!-- Label 'M' inside the magenta circle -->
+
+            <!-- Cyan Circle -->
+            <!-- Circle with center (275,195), radius 95, and semi-transparent fill -->
+            <circle cx="275" cy="195" r="95" fill="cyan" opacity="0.75" />
+            <text x="275" y="200" font-size="28" fill="black" text-anchor="middle">C</text> <!-- Label 'C' inside the cyan circle -->
+
+            <!-- Yellow Circle -->
+            <!-- Circle with center (205,110), radius 95, and semi-transparent fill -->
+            <circle cx="205" cy="110" r="95" fill="yellow" opacity="0.75" />
+            <text x="205" y="115" font-size="28" fill="black" text-anchor="middle">Y</text> <!-- Label 'Y' inside the yellow circle -->
+        </svg>
+    </div>
+
+    <!-- Problem 3: Shaded Rectangles -->
+    <div class="svg-container"> <!-- Container for the SVG elements related to Problem 3 -->
+        <h2>Problem 3: Shaded Rectangles</h2> <!-- Subheading for Problem 3 -->
+
+        <svg width="300" height="300"> <!-- SVG canvas with specific width and height -->
+            <!-- Shaded rectangles from dark to light -->
+            <rect x="55" y="55" width="190" height="50" fill="#000000" /> <!-- Darkest rectangle -->
+            <rect x="55" y="105" width="190" height="50" fill="#555555" /> <!-- Slightly lighter rectangle -->
+            <rect x="55" y="155" width="190" height="50" fill="#999999" /> <!-- Even lighter rectangle -->
+            <rect x="55" y="205" width="190" height="50" fill="#CCCCCC" /> <!-- Lightest rectangle -->
+        </svg>
+    </div>
+</body>
+
+</html>
