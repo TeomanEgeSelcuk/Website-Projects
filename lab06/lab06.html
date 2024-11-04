@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lab 06 - SVG Solutions</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            text-align: center;
+
+            background-color: #f0f0f0;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+        h1 {
+
+            background-color: #333;
+
+            color: #fff;
+
+            padding: 20px 0;
+
+            margin: 0;
+
+        }
+
+        .svg-container {
+
+            margin: 40px auto;
+
+            max-width: 800px;
+
+            background-color: #fff;
+
+            padding: 20px;
+
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+            border-radius: 10px;
+
+        }
+
+        h2 {
+
+            color: #333;
+
+        }
+
+        svg {
+
+            border: 1px solid #ccc;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Lab 06 - SVG Solutions</h1>
+
+
+
+    <!-- Problem 1: Polygons -->
+
+    <div class="svg-container">
+        <h2>Problem 1: Polygons</h2>
+        <svg width="800" height="300">
+            <!-- Triangle -->
+            <polygon points="100,150 150,250 50,250" fill="yellow" stroke="black" stroke-width="2" />
+            <text x="100" y="270" font-size="20" fill="black" text-anchor="middle">Triangle</text>
+            
+            <!-- Quadrilateral -->
+            <rect x="200" y="150" width="100" height="100" fill="#87CEEB" stroke="black" stroke-width="2" />
+            <text x="250" y="270" font-size="20" fill="black" text-anchor="middle">Quadrilateral</text>
+            
+            <!-- Pentagon -->
+            <polygon points="400,150 450,150 475,200 450,250 400,250 375,200" fill="#FFC0CB" stroke="black" stroke-width="2" />
+            <text x="425" y="270" font-size="20" fill="black" text-anchor="middle">Pentagon</text>
+            
+            <!-- Hexagon -->
+            <polygon points="550,150 600,150 625,200 600,250 550,250 525,200" fill="#98FB98" stroke="black" stroke-width="2" />
+            <text x="575" y="270" font-size="20" fill="black" text-anchor="middle">Hexagon</text>
+        </svg>
+    </div>
+    
+    
+    
+    
+
+
+    <!-- Problem 2: Overlapping Circles -->
+
+    <div class="svg-container">
+
+        <h2>Problem 2: Overlapping Circles</h2>
+
+        <svg width="400" height="400">
+
+            <!-- Magenta Circle -->
+
+            <circle cx="130" cy="200" r="100" fill="magenta" opacity="0.8" />
+
+            <text x="130" y="205" font-size="30" fill="black" text-anchor="middle">M</text>
+
+            
+
+            <!-- Cyan Circle -->
+
+            <circle cx="270" cy="200" r="100" fill="cyan" opacity="0.8" />
+
+            <text x="270" y="205" font-size="30" fill="black" text-anchor="middle">C</text>
+
+            
+
+            <!-- Yellow Circle -->
+
+            <circle cx="200" cy="100" r="100" fill="yellow" opacity="0.8" />
+
+            <text x="200" y="105" font-size="30" fill="black" text-anchor="middle">Y</text>
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- Problem 3: Shaded Rectangles -->
+
+    <div class="svg-container">
+
+        <h2>Problem 3: Shaded Rectangles</h2>
+
+        <svg width="300" height="300">
+
+            <rect x="50" y="50" width="200" height="50" fill="black" />
+
+            <rect x="50" y="100" width="200" height="50" fill="#444" />
+
+            <rect x="50" y="150" width="200" height="50" fill="#888" />
+
+            <rect x="50" y="200" width="200" height="50" fill="#CCC" />
+
+        </svg>
+
+    </div>
+
+</body>
+
+</html>
