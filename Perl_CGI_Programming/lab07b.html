@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- Specifies the document type as HTML5 -->
+
+<html lang="en">
+<!-- Sets the language of the document to English -->
+
+<head>
+    <!-- Metadata and settings for the document go inside the <head> tag -->
+
+    <meta charset="UTF-8">
+    <!-- Specifies the character encoding as UTF-8 (supports most characters) -->
+
+    <title>Customer Registration</title>
+    <!-- Sets the title of the HTML document (appears on the browser tab) -->
+
+    <style>
+        /* CSS styles for the form and layout */
+
+        body {
+            font-family: Arial, sans-serif;
+            /* Sets a basic sans-serif font for the body text */
+        }
+
+        form {
+            width: 600px;
+            margin: 0 auto;
+            /* Centers the form horizontally with a fixed width of 600px */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            /* Displays labels as block elements with a top margin for spacing */
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            /* Ensures padding and border are included in the total width */
+        }
+
+        input[type="submit"] {
+            width: auto;
+            margin-top: 20px;
+            padding: 10px 20px;
+            /* Styles the submit button with auto width, margin, and padding */
+        }
+    </style>
+    <!-- Internal CSS styling ends here -->
+</head>
+
+<body>
+    <!-- Main content of the page starts here -->
+
+    <h1>Customer Registration</h1>
+    <!-- Main heading of the page -->
+
+    <form action="/~tselcuk/cgi-bin/lab07b.cgi" method="post" enctype="multipart/form-data">
+        <!--
+            The form sends data to the specified CGI script using the POST method.
+            enctype="multipart/form-data" allows file uploads.
+        -->
+
+        <label for="first_name">First Name:</label>
+        <!-- Label for the first name input field -->
+
+        <input type="text" name="first_name" id="first_name" required>
+        <!-- Text input for first name, marked as required -->
+
+        <label for="last_name">Last Name:</label>
+        <!-- Label for the last name input field -->
+
+        <input type="text" name="last_name" id="last_name" required>
+        <!-- Text input for last name, marked as required -->
+
+        <label for="street">Street Name:</label>
+        <!-- Label for the street name input field -->
+
+        <input type="text" name="street" id="street" required>
+        <!-- Text input for street name, marked as required -->
+
+        <label for="city">City:</label>
+        <!-- Label for the city input field -->
+
+        <input type="text" name="city" id="city" required>
+        <!-- Text input for city, marked as required -->
+
+        <label for="postal_code">Postal Code:</label>
+        <!-- Label for the postal code input field -->
+
+        <input type="text" name="postal_code" id="postal_code" required>
+        <!-- Text input for postal code, marked as required -->
+
+        <label for="province">Province:</label>
+        <!-- Label for the province dropdown selection -->
+
+        <select name="province" id="province" required>
+            <!-- Dropdown (select) list for choosing a province, marked as required -->
+
+            <option value="">Select Province</option>
+            <!-- Default option prompting user to select a province -->
+
+            <option value="AB">Alberta</option>
+            <option value="BC">British Columbia</option>
+            <option value="MB">Manitoba</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland and Labrador</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+            <option value="QC">Quebec</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="NT">Northwest Territories</option>
+            <option value="NU">Nunavut</option>
+            <option value="YT">Yukon</option>
+            <!-- Options for each Canadian province and territory -->
+        </select>
+
+        <label for="phone">Phone Number:</label>
+        <!-- Label for the phone number input field -->
+
+        <input type="text" name="phone" id="phone" required>
+        <!-- Text input for phone number, marked as required -->
+
+        <label for="email">Email Address:</label>
+        <!-- Label for the email input field -->
+
+        <input type="email" name="email" id="email" required>
+        <!-- Email input for email address, marked as required.
+             The "email" type ensures basic validation in the browser. -->
+
+        <label for="photo">Photograph:</label>
+        <!-- Label for the photo upload input field -->
+
+        <input type="file" name="photo" id="photo" accept="image/*" required>
+        <!-- File input for uploading a photo, marked as required.
+             accept="image/*" restricts file selection to image types only. -->
+
+        <input type="submit" value="Register">
+        <!-- Submit button to send the form data to the server -->
+    </form>
+    <!-- Form ends here -->
+</body>
+
+</html>
+<!-- End of the HTML document -->
