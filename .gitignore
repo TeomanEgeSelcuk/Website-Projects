@@ -1,2 +1,5 @@
 LICENSE
 README.md
+cps-530-exam-practice/
+uploads/*
+!uploads/
