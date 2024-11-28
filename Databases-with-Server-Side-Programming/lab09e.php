@@ -6,7 +6,7 @@
 $host = 'localhost';
 $username = '';
 $password = '';
-$dbname = 'tselcuk';
+$dbname = '';
 
 // Connect to the database
 $connect = new mysqli($host, $username, $password, $dbname);
@@ -16,13 +16,26 @@ if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }
 
-// Get total number of images
+// Check total number of images
 $total_result = $connect->query("SELECT COUNT(*) as total FROM photographs");
+if (!$total_result) {
+    die("Error fetching total number of images: " . $connect->error);
+}
+
 $total_row = $total_result->fetch_assoc();
 $total_images = $total_row['total'];
 
-// Get one random image
+// If no images are found, display a message and stop execution
+if ($total_images == 0) {
+    die("<p style='text-align: center; font-size: 18px; color: #555;'>There are no photos to be found.</p>");
+}
+
+// Fetch one random image
 $random_result = $connect->query("SELECT * FROM photographs ORDER BY RAND() LIMIT 1");
+if (!$random_result) {
+    die("Error fetching random image: " . $connect->error);
+}
+
 $random_image = $random_result->fetch_assoc();
 
 ?>
@@ -64,7 +77,9 @@ $random_image = $random_result->fetch_assoc();
 </head>
 <body>
     <h1>Random Photograph</h1>
+
     <?php
+    // Display the random image
     if ($random_image) {
         echo '<div class="photo">';
         echo '<img src="' . htmlspecialchars($random_image['picture_url']) . '" alt="' . htmlspecialchars($random_image['subject']) . '">';
@@ -76,6 +91,7 @@ $random_image = $random_result->fetch_assoc();
         echo '<p>No photographs found.</p>';
     }
     ?>
+
     <div class="total-images">
         <p>Total number of images in the database: <?php echo $total_images; ?></p>
     </div>

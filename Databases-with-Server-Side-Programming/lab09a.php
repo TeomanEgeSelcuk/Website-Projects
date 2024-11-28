@@ -6,7 +6,7 @@
 $host = 'localhost';
 $username = '';
 $password = '';
-$dbname = 'tselcuk';
+$dbname = '';
 
 // Connect to the database
 $connect = new mysqli($host, $username, $password, $dbname);
@@ -16,23 +16,6 @@ if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }
 echo "<div>Connected to MySQL Database <b>$dbname</b></div><br>";
-
-
-/*
-// SQL to drop the table
-$table_name = 'photographs'; // Define the table name to be dropped
-$sql_drop_table = "DROP TABLE IF EXISTS $table_name"; // SQL query to drop the table
-
-// Execute the query and handle the result
-if ($connect->query($sql_drop_table) === TRUE) {
-    // Display success message if the table is dropped successfully
-    echo "Table '$table_name' and all its contents have been deleted successfully.<br>";
-} else {
-    // Display error message if the table cannot be dropped
-    echo "Error deleting table: " . $connect->error . "<br>";
-}
-*/
-
 
 
 // Create table if it doesn't exist with UNIQUE constraint on picture_url
@@ -55,7 +38,7 @@ $records = [
     ['subject' => 'Northern Lights', 'location' => 'Yukon', 'date_taken' => '2021-03-15', 'picture_url' => './CPS_510_img_uploads/northern_lights.jpg'],
     ['subject' => 'Banff National Park in Winter', 'location' => 'Alberta', 'date_taken' => '2020-12-10', 'picture_url' => './CPS_510_img_uploads/banff_winter.jpg'],
     ['subject' => 'Fall Leaves in Ontario', 'location' => 'Ontario', 'date_taken' => '2020-10-05', 'picture_url' => './CPS_510_img_uploads/fall_leaves_ontario.webp'],
-    ['subject' => 'Distillery District', 'location' => 'Toronto, Ontario', 'date_taken' => '2021-07-20', 'picture_url' => './CPS_510_img_uploads/distillery_district.jpeg'],
+    ['subject' => 'Distillery District', 'location' => 'Ontario', 'date_taken' => '2021-07-20', 'picture_url' => './CPS_510_img_uploads/distillery_district.jpeg'],
     ['subject' => 'Icebergs in Newfoundland', 'location' => 'Newfoundland and Labrador', 'date_taken' => '2019-05-15', 'picture_url' => './CPS_510_img_uploads/icebergs_newfoundland.jpeg'],
     ['subject' => 'Wildlife in British Columbia', 'location' => 'British Columbia', 'date_taken' => '2021-08-25', 'picture_url' => './CPS_510_img_uploads/wildlife_bc.webp'],
     ['subject' => 'CN Tower at Dusk', 'location' => 'Ontario', 'date_taken' => '2021-09-30', 'picture_url' => './CPS_510_img_uploads/cn_tower_dusk.webp'],
@@ -112,6 +95,27 @@ foreach ($records as $record) {
         echo "Image for '<b>$subject</b>' not found or cannot be opened. Skipping upload.<br>";
     }
 }
+
+
+$result = $connect->query("SELECT COUNT(*) as count FROM photographs");
+$row = $result->fetch_assoc();
+echo "Total records in the database: " . $row['count'] . "<br>";
+
+/*
+// SQL to drop the table
+$table_name = 'photographs'; // Define the table name to be dropped
+$sql_drop_table = "DROP TABLE IF EXISTS $table_name"; // SQL query to drop the table
+
+// Execute the query and handle the result
+if ($connect->query($sql_drop_table) === TRUE) {
+    // Display success message if the table is dropped successfully
+    echo "Table '$table_name' and all its contents have been deleted successfully.<br>";
+} else {
+    // Display error message if the table cannot be dropped
+    echo "Error deleting table: " . $connect->error . "<br>";
+}
+*/
+
 
 $insert_stmt->close();
 $connect->close();

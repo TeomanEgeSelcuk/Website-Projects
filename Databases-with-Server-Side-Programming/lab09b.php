@@ -6,7 +6,7 @@
 $host = 'localhost';
 $username = '';
 $password = '';
-$dbname = 'tselcuk';
+$dbname = '';
 
 // Connect to the database
 $connect = new mysqli($host, $username, $password, $dbname);
@@ -33,7 +33,7 @@ $baseImageUrl = 'https://webdev.cs.torontomu.ca/~tselcuk/CPS_510_img_uploads/';
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
             margin: 0;
             padding: 0;
         }
@@ -46,8 +46,13 @@ $baseImageUrl = 'https://webdev.cs.torontomu.ca/~tselcuk/CPS_510_img_uploads/';
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #ffffff;
             margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 36px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .photo {

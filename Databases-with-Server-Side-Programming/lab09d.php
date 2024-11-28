@@ -6,7 +6,7 @@
 $host = 'localhost';
 $username = '';
 $password = '';
-$dbname = 'tselcuk';
+$dbname = '';
 
 // Connect to the database
 $connect = new mysqli($host, $username, $password, $dbname);
@@ -16,15 +16,23 @@ if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }
 
-// Get distinct locations
+// Fetch distinct locations
 $locations_result = $connect->query("SELECT DISTINCT location FROM photographs");
+if (!$locations_result) {
+    die("Error fetching locations: " . $connect->error);
+}
+
 $locations = [];
 while ($row = $locations_result->fetch_assoc()) {
     $locations[] = $row['location'];
 }
 
-// Get distinct years from date_taken
+// Fetch distinct years from date_taken
 $years_result = $connect->query("SELECT DISTINCT YEAR(date_taken) as year FROM photographs");
+if (!$years_result) {
+    die("Error fetching years: " . $connect->error);
+}
+
 $years = [];
 while ($row = $years_result->fetch_assoc()) {
     $years[] = $row['year'];
@@ -109,7 +117,8 @@ while ($row = $years_result->fetch_assoc()) {
         </form>
     </div>
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'GET' && (isset($_GET['location']) || isset($_GET['year']))) {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        // Validate and process search criteria
         $location = isset($_GET['location']) && $_GET['location'] != '' ? $connect->real_escape_string($_GET['location']) : '';
         $year = isset($_GET['year']) && $_GET['year'] != '' ? (int)$_GET['year'] : '';
 
@@ -129,7 +138,13 @@ while ($row = $years_result->fetch_assoc()) {
         $sql = "SELECT * FROM photographs $where_clause";
         $result = $connect->query($sql);
 
+        // Check for query errors
+        if (!$result) {
+            die("Error executing query: " . $connect->error);
+        }
+
         echo '<div class="photo-container">';
+
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="photo">';
@@ -140,8 +155,10 @@ while ($row = $years_result->fetch_assoc()) {
                 echo '</div>';
             }
         } else {
+            // Display no photos message
             echo '<p class="no-photos">No photographs found for the selected criteria.</p>';
         }
+
         echo '</div>';
     }
     ?>

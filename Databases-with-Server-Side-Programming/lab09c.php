@@ -6,7 +6,7 @@
 $host = 'localhost';
 $username = '';
 $password = '';
-$dbname = 'tselcuk';
+$dbname = '';
 
 // Connect to the database
 $connect = new mysqli($host, $username, $password, $dbname);
@@ -16,6 +16,21 @@ if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }
 echo "<div>Connected to MySQL Database <b>$dbname</b></div><br>";
+
+// Begin: Code to delete all files and ensure no photographs in Ontario
+// This block is for development/testing purposes. Comment this out in production.
+
+/* START DEVELOPMENT BLOCK 
+
+// Query to delete all records where location is Ontario
+$deleteSQL = "DELETE FROM photographs WHERE location = 'Ontario'";
+if ($connect->query($deleteSQL) === TRUE) {
+    echo "<div>All records in Ontario have been deleted successfully.</div><br>";
+} else {
+    echo "<div>Error deleting records in Ontario: " . $connect->error . "</div><br>";
+}
+
+ END DEVELOPMENT BLOCK */
 
 // Query to get records where location is Ontario
 $sql = "SELECT * FROM photographs WHERE location = 'Ontario'";
@@ -87,7 +102,8 @@ $result = $connect->query($sql);
     <div class="photo-container">
         <h1>Photographs Taken in Ontario</h1>
         <?php
-        if ($result->num_rows > 0) {
+        // Ensure $result is valid before processing
+        if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="photo">';
                 echo '<img src="' . htmlspecialchars($row['picture_url']) . '" alt="' . htmlspecialchars($row['subject']) . '">';
@@ -96,6 +112,7 @@ $result = $connect->query($sql);
                 echo '</div>';
             }
         } else {
+            // This block will execute when there are no Ontario photographs
             echo '<p class="no-photos">No photographs taken in Ontario.</p>';
         }
         ?>
@@ -104,6 +121,8 @@ $result = $connect->query($sql);
 </html>
 
 <?php
+
 // Close the database connection
 $connect->close();
+
 ?>
