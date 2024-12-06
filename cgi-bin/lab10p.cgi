@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+
 import cgi
 import cgitb
 
@@ -28,25 +29,49 @@ print """<!DOCTYPE html>
 <head>
     <title>{city}, {country}</title>
     <style>
+        html, body {{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FF5733; /* Bright red background */
+        }}
         body {{
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
         }}
         h1 {{
-            background-color: #FF5733;
-            color: white;
+            background-color: #FF5733; /* Red background to match the page */
+            color: yellow;
             font-size: 48px;
             padding: 20px;
+            margin: 0;
+            width: 100%;
+        }}
+        .image-container {{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FF5733; /* Ensure background around the image is red */
+            padding: 20px 0;
         }}
         img {{
             width: 80%;
             height: auto;
-            border: 15px solid #900C3F;
+            border: 15px solid #900C3F; /* Wide maroon-colored border */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* Adds shadow for attractiveness */
         }}
     </style>
 </head>
 <body>
     <h1>{city}, {country}</h1>
-    <img src="{image_url}" alt="Image of {city}">
+    <div class="image-container">
+        <img src="{image_url}" alt="Image of {city}">
+    </div>
 </body>
 </html>
 """.format(
