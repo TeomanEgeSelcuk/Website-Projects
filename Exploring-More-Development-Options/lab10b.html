@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab10b - City Information Form</title>
+</head>
+<body>
+    <h1>Enter City Information</h1>
+    <form id="form1" action="/~tselcuk/cgi-bin/lab10r.cgi" method="post">
+        <label for="city">City Name:</label><br>
+        <input type="text" id="city" name="city"><br><br>
+        <label for="province">Province/State:</label><br>
+        <input type="text" id="province" name="province"><br><br>
+        <label for="country">Country:</label><br>
+        <input type="text" id="country" name="country"><br><br>
+        <label for="image_url">Image URL:</label><br>
+        <input type="text" id="image_url" name="image_url"><br><br>
+        <input type="submit" value="Submit to Ruby Script">
+    </form>
+
+    <form id="form2" action="/~tselcuk/cgi-bin/lab10p.cgi" method="post">
+        <!-- Hidden inputs to hold the same data -->
+        <input type="hidden" id="city2" name="city">
+        <input type="hidden" id="province2" name="province">
+        <input type="hidden" id="country2" name="country">
+        <input type="hidden" id="image_url2" name="image_url">
+        <input type="submit" value="Submit to Python Script">
+    </form>
+
+    <script>
+        // Synchronize form fields between the two forms
+        var form1 = document.getElementById('form1');
+        var form2 = document.getElementById('form2');
+
+        function syncFields() {
+            document.getElementById('city2').value = document.getElementById('city').value;
+            document.getElementById('province2').value = document.getElementById('province').value;
+            document.getElementById('country2').value = document.getElementById('country').value;
+            document.getElementById('image_url2').value = document.getElementById('image_url').value;
+        }
+
+        form1.oninput = syncFields;
+    </script>
+</body>
+</html>
